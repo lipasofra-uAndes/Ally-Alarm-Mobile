@@ -19,6 +19,17 @@ export default function Configuracion() {
 
       {/* Settings card */}
       <View style={styles.card}>
+        {/* Integración calendario */}
+        <Pressable
+          style={({ pressed }) => [styles.row, pressed && styles.pressedRow]}
+          onPress={() => navigation.navigate('IntCalendario')}
+        >
+          <Text style={styles.rowLabel}>Integración calendario</Text>
+          <Text style={styles.rowChevron}>›</Text>
+        </Pressable>
+
+        <View style={styles.divider} />
+
         {/* Sugerencias inteligentes */}
         <View style={styles.row}>
           <Text style={styles.rowLabel}>Sugerencias inteligentes</Text>

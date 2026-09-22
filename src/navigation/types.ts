@@ -7,6 +7,9 @@ export type RootStackParamList = {
   ModalPlantilla: undefined;
   CrearForm: { category?: string } | undefined;
   Configuracion: undefined;
+  IntCalendario: undefined;
+  SelecProveedor: { selected: string | null };
+  IntegracionExitosa: undefined;
   SugerenciaConfirm: undefined;
 };
 

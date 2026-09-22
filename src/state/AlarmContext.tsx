@@ -9,6 +9,30 @@ export type Alarm = {
   rotated?: boolean;
 };
 
+const calendarAlarms: Alarm[] = [
+  {
+    id: 'medicine',
+    name: 'Pastilla de la memoria',
+    time: '8:00am',
+    color: '#fdef90',
+    image: require('../../assets/images/icon-medicine.png'),
+  },
+  {
+    id: 'standup',
+    name: 'Daily Standup',
+    time: '9:30am',
+    color: '#fbc3c3',
+    image: require('../../assets/images/icon-laptop.png'),
+  },
+  {
+    id: 'birthday',
+    name: 'Reunión cumpleaños',
+    time: '4:00pm',
+    color: '#b1cbf2',
+    image: require('../../assets/images/icon-calendar2.png'),
+  },
+];
+
 const initialAlarm: Alarm = {
   id: 'gym',
   name: 'Entreno en gimnasio',
@@ -21,6 +45,7 @@ const initialAlarm: Alarm = {
 type AlarmContextValue = {
   alarms: Alarm[];
   addAlarm: (alarm: Alarm) => void;
+  connectCalendar: () => void;
 };
 
 const AlarmContext = createContext<AlarmContextValue | undefined>(undefined);
@@ -34,7 +59,14 @@ export function AlarmProvider({ children }: { children: ReactNode }) {
       : [alarm, ...current]));
   };
 
-  return <AlarmContext.Provider value={{ alarms, addAlarm }}>{children}</AlarmContext.Provider>;
+  const connectCalendar = () => {
+    setAlarms((current) => [
+      ...current,
+      ...calendarAlarms.filter((alarm) => !current.some((item) => item.id === alarm.id)),
+    ]);
+  };
+
+  return <AlarmContext.Provider value={{ alarms, addAlarm, connectCalendar }}>{children}</AlarmContext.Provider>;
 }
 
 export function useAlarms() {
