@@ -14,6 +14,9 @@ import CrearAlarmaCategoria from './src/screens/CrearAlarmaCategoria';
 import ModalPlantilla from './src/screens/ModalPlantilla';
 import CrearAlarmaForm from './src/screens/CrearAlarmaForm';
 import Configuracion from './src/screens/Configuracion';
+import IntegracionCalendario from './src/screens/IntegracionCalendario';
+import SeleccionProveedor from './src/screens/SeleccionProveedor';
+import IntegracionExitosa from './src/screens/IntegracionExitosa';
 import SugerenciaConfirm from './src/screens/SugerenciaConfirm';
 import { AlarmProvider } from './src/state/AlarmContext';
 
@@ -60,6 +63,13 @@ export default function App() {
             />
             <Stack.Screen name="CrearForm" component={CrearAlarmaForm} />
             <Stack.Screen name="Configuracion" component={Configuracion} />
+            <Stack.Screen name="IntCalendario" component={IntegracionCalendario} />
+            <Stack.Screen name="SelecProveedor" component={SeleccionProveedor} />
+            <Stack.Screen
+              name="IntegracionExitosa"
+              component={IntegracionExitosa}
+              options={{ presentation: 'transparentModal', animation: 'fade' }}
+            />
             <Stack.Screen
               name="SugerenciaConfirm"
               component={SugerenciaConfirm}
