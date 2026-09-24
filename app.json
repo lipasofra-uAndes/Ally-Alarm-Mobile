@@ -14,6 +14,9 @@
     },
     "android": {
       "package": "com.allyalarm.app"
-    }
+    },
+    "plugins": [
+      "expo-asset"
+    ]
   }
 }

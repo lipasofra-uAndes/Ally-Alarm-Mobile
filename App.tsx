@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { MD3LightTheme, PaperProvider } from 'react-native-paper';
 
 import type { RootStackParamList } from './src/navigation/types';
 import InicioScreen from './src/screens/InicioScreen';
@@ -23,6 +24,10 @@ import { AlarmProvider } from './src/state/AlarmContext';
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+const paperTheme = {
+  ...MD3LightTheme,
+  colors: { ...MD3LightTheme.colors, primary: '#7055b5', primaryContainer: '#bcbfff' },
+};
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -31,6 +36,7 @@ export default function App() {
     'Comfortaa-Medium': require('./assets/fonts/Comfortaa-Medium.ttf'),
     'Comfortaa-SemiBold': require('./assets/fonts/Comfortaa-SemiBold.ttf'),
     'Comfortaa-Bold': require('./assets/fonts/Comfortaa-Bold.ttf'),
+    Roboto: require('./assets/fonts/Roboto-VariableFont_wdth,wght.ttf'),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -45,9 +51,10 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
+      <PaperProvider theme={paperTheme}>
       <AlarmProvider>
         <View style={styles.root} onLayout={onLayoutRootView}>
-        <StatusBar style="auto" />
+        <StatusBar style="auto" hidden={Platform.OS === 'web'} />
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Inicio"
@@ -79,6 +86,7 @@ export default function App() {
         </NavigationContainer>
         </View>
       </AlarmProvider>
+      </PaperProvider>
     </SafeAreaProvider>
   );
 }
