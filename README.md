@@ -70,7 +70,11 @@ npm run android
 Inicio (login)
   └─ Home (tap any login provider)
        ├─ Suggestion banner → SugerenciaConfirm (modal) → Home
-       └─ Settings icon → Configuracion
+       ├─ Settings icon → Configuracion
+       │    └─ Integración calendario → IntCalendario
+       │         └─ Conectar → SelecProveedor (select=null)
+       │              └─ Tap provider → SelecProveedor (selected)
+       │                   └─ Tap again → IntegracionExitosa (modal) → Home
        └─ FAB → CrearCategoria
             ├─ Entrenamiento → ModalPlantilla (modal) → CrearForm → Home
             └─ Other category → CrearForm → Home
@@ -86,4 +90,7 @@ Inicio (login)
 | Template modal | `src/screens/ModalPlantilla.tsx` |
 | Create alarm — form | `src/screens/CrearAlarmaForm.tsx` |
 | Settings | `src/screens/Configuracion.tsx` |
+| Calendar integration | `src/screens/IntegracionCalendario.tsx` |
+| Provider selection | `src/screens/SeleccionProveedor.tsx` |
+| Integration success (modal) | `src/screens/IntegracionExitosa.tsx` |
 | Smart suggestion confirm (modal) | `src/screens/SugerenciaConfirm.tsx` |

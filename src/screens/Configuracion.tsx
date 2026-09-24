@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Pressable, View, Text, Switch, StyleSheet } from 'react-native';
+import { Pressable, View, Text, StyleSheet } from 'react-native';
+import { Switch } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NavigationProp } from '../navigation/types';
@@ -13,7 +14,7 @@ export default function Configuracion() {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={[styles.header, { paddingTop: insets.top + 20 }]}>
+      <View style={[styles.header, { paddingTop: insets.top + 68 }]}>
         <Text style={styles.headerTitle}>Configuración</Text>
       </View>
 
@@ -25,7 +26,6 @@ export default function Configuracion() {
           onPress={() => navigation.navigate('IntCalendario')}
         >
           <Text style={styles.rowLabel}>Integración calendario</Text>
-          <Text style={styles.rowChevron}>›</Text>
         </Pressable>
 
         <View style={styles.divider} />
@@ -33,11 +33,9 @@ export default function Configuracion() {
         {/* Sugerencias inteligentes */}
         <View style={styles.row}>
           <Text style={styles.rowLabel}>Sugerencias inteligentes</Text>
-          <Switch
-            value={sugerencias}
-            onValueChange={setSugerencias}
-            trackColor={{ false: '#e0d8e8', true: '#6750a4' }}
-            thumbColor="#fff"
+            <Switch
+              value={sugerencias}
+              onValueChange={setSugerencias}
           />
         </View>
 
@@ -46,7 +44,6 @@ export default function Configuracion() {
         {/* Privacidad */}
         <Pressable style={({ pressed }) => [styles.row, pressed && styles.pressedRow]}>
           <Text style={styles.rowLabel}>Privacidad y datos</Text>
-          <Text style={styles.rowChevron}>›</Text>
         </Pressable>
 
         <View style={styles.divider} />
@@ -56,7 +53,7 @@ export default function Configuracion() {
           style={({ pressed }) => [styles.row, pressed && styles.pressedRow]}
           onPress={() => navigation.reset({ index: 0, routes: [{ name: 'Inicio' }] })}
         >
-          <Text style={[styles.rowLabel, styles.rowLabelDanger]}>Cerrar sesión</Text>
+          <Text style={styles.rowLabel}>Cerrar sesión</Text>
         </Pressable>
       </View>
 
@@ -71,7 +68,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ebeeff',
   },
   header: {
-    paddingHorizontal: 20,
+    paddingLeft: 31,
+    paddingRight: 20,
     alignItems: 'center',
   },
   headerTitle: {
@@ -84,6 +82,7 @@ const styles = StyleSheet.create({
   card: {
     marginHorizontal: 47,
     marginTop: 50,
+    paddingBottom: 4,
     backgroundColor: '#f7f2fa',
     borderRadius: 16,
     shadowColor: '#000',
@@ -98,24 +97,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingTop: 16,
+    paddingBottom: 14
   },
   rowLabel: {
     fontFamily: 'Comfortaa-Light',
     fontSize: 14,
     color: '#1d1b20',
     letterSpacing: 0.1,
-  },
-  rowLabelDanger: {
-    color: '#c0392b',
+    marginHorizontal: 0,
+    marginVertical: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
   },
   pressedRow: {
     backgroundColor: '#6F6BC1',
-  },
-  rowChevron: {
-    fontFamily: 'Comfortaa-Regular',
-    fontSize: 22,
-    color: '#1d1b20',
   },
   divider: {
     height: 1,

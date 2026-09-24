@@ -1,32 +1,22 @@
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NavigationProp } from '../navigation/types';
-import { useAlarms } from '../state/AlarmContext';
 
 export default function IntegracionExitosa() {
   const navigation = useNavigation<NavigationProp>();
-  const { connectCalendar } = useAlarms();
-
   return (
-    <View style={styles.backdrop}>
-      <View style={styles.card}>
+    <Pressable style={styles.backdrop} onPress={() => navigation.goBack()}>
+      <Pressable style={styles.card} onPress={() => {}}>
         <Image
           source={require('../../assets/images/icon-check-green.png')}
           style={styles.checkIcon}
           resizeMode="contain"
         />
-        <Text style={styles.title}>¡Integración exitosa!</Text>
-        <Pressable
-          style={({ pressed }) => [styles.btn, pressed && styles.pressedButton]}
-          onPress={() => {
-            connectCalendar();
-            navigation.navigate('Home');
-          }}
-        >
-          <Text style={styles.btnText}>Continuar</Text>
-        </Pressable>
-      </View>
-    </View>
+        <Text style={styles.title}>
+          ¡Integración exitosa!
+        </Text>
+      </Pressable>
+    </Pressable>
   );
 }
 
@@ -40,9 +30,12 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#f7f2fa',
     borderRadius: 16,
-    width: 280,
-    paddingVertical: 40,
-    paddingHorizontal: 32,
+    width: 290,
+    height: 229,
+    paddingVertical: 48,
+    paddingHorizontal: 16,
+    marginLeft: -3,
+    marginTop: 1,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
@@ -60,20 +53,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#1e1e1e',
     textAlign: 'center',
-    marginBottom: 24,
-  },
-  btn: {
-    backgroundColor: '#bcbfff',
-    borderRadius: 100,
-    height: 40,
+    letterSpacing: -0.3,
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnText: {
-    fontFamily: 'Comfortaa-SemiBold',
-    fontSize: 14,
-    color: '#1e1e1e',
+    marginBottom: 0,
   },
   pressedButton: {
     backgroundColor: '#6F6BC1',

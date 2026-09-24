@@ -1,15 +1,26 @@
+import { useEffect } from 'react';
 import { View, Text, Image, Pressable, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import type { NavigationProp } from '../navigation/types';
+import type { NavigationProp, RootStackParamList } from '../navigation/types';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import TabBar from '../components/TabBar';
 import FigmaIcon from '../components/FigmaIcon';
 import { useAlarms } from '../state/AlarmContext';
 
-export default function HomeAlarmas() {
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+export default function HomeAlarmas({ route }: Props) {
   const navigation = useNavigation<NavigationProp>();
   const insets = useSafeAreaInsets();
   const { alarms } = useAlarms();
+
+  useEffect(() => {
+    if (route.params?.openIntegrationModal) {
+      navigation.setParams({ openIntegrationModal: undefined });
+      navigation.navigate('IntegracionExitosa');
+    }
+  }, [navigation, route.params?.openIntegrationModal]);
 
   return (
     <View style={styles.container}>
@@ -19,7 +30,7 @@ export default function HomeAlarmas() {
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={[styles.header, { paddingTop: insets.top + 20 }]}>
+        <View style={[styles.header, { paddingTop: insets.top + 68 }]}>
           <View style={styles.headerSpacer} />
           <Text style={styles.headerTitle}>Mis alarmas</Text>
           <View style={styles.headerRight}>
@@ -134,6 +145,8 @@ const styles = StyleSheet.create({
   headerRight: {
     flex: 1,
     alignItems: 'flex-end',
+    transform: [{ translateY: -18 }],
+    marginTop: -9,
   },
   settingsBtn: {
     backgroundColor: '#6f6bc1',
@@ -148,10 +161,11 @@ const styles = StyleSheet.create({
     height: 18,
   },
   suggestionCard: {
-    marginTop: 18,
+    marginTop: 31,
     marginHorizontal: 56,
     backgroundColor: '#f5eff7',
     borderRadius: 8,
+    paddingLeft: 18,
     padding: 12,
     flexDirection: 'row',
     alignItems: 'flex-start',
@@ -164,7 +178,7 @@ const styles = StyleSheet.create({
   sparklesIcon: {
     width: 23,
     height: 23,
-    marginTop: 2,
+    marginTop: -5,
     marginRight: 8,
   },
   suggestionText: {
@@ -175,22 +189,26 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#1e1e1e',
     letterSpacing: -0.26,
+    marginLeft: -1,
   },
   suggestionBody: {
     fontFamily: 'Comfortaa-Light',
     fontSize: 13,
+    lineHeight: 16,
     color: '#1e1e1e',
     letterSpacing: -0.26,
-    marginTop: 4,
+    marginTop: 7,
+    marginLeft: -37,
   },
   alarmList: {
     paddingHorizontal: 24,
-    marginTop: 20,
+    marginTop: 38,
     gap: 23,
   },
   alarmCard: {
+    paddingTop: 4,
     borderRadius: 8,
-    height: 70,
+    height: 69,
     flexDirection: 'row',
     alignItems: 'center',
     shadowColor: '#000',
@@ -207,6 +225,7 @@ const styles = StyleSheet.create({
   alarmInfo: {
     flex: 1,
     alignItems: 'center',
+    marginBottom: -6,
   },
   alarmName: {
     fontFamily: 'Comfortaa-Regular',
@@ -219,6 +238,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#000',
     letterSpacing: 0.5,
+    marginTop: 8,
   },
   alarmMore: {
     marginRight: 14,
@@ -231,7 +251,9 @@ const styles = StyleSheet.create({
   alarmMoreDots: {
     fontSize: 14,
     color: '#000',
-    letterSpacing: 2,
+    letterSpacing: 0,
+    paddingRight: 11,
+    paddingBottom: 15,
   },
   fab: {
     position: 'absolute',

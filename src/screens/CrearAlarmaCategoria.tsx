@@ -46,9 +46,9 @@ export default function CrearAlarmaCategoria() {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={[styles.header, { paddingTop: insets.top + 20 }]}>
+      <View style={[styles.header, { paddingTop: insets.top + 69 }]}>
         <Text style={styles.headerTitle}>Crear alarma</Text>
-        <Text style={styles.headerSubtitle}>¿Qué tipo de alarma quieres crear?</Text>
+        <Text style={styles.headerSubtitle}>¿Para qué es esta alarma?</Text>
       </View>
 
       {/* Category grid */}
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ebeeff',
   },
   header: {
+    paddingLeft: 17,
     paddingHorizontal: 20,
     alignItems: 'center',
   },
@@ -121,25 +122,26 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'rgba(20,18,24,0.6)',
     letterSpacing: -0.4,
-    marginTop: 4,
+    marginTop: 11,
     textAlign: 'center',
   },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    paddingLeft: 52,
     paddingHorizontal: 50,
-    marginTop: 56,
+    marginTop: 58,
     columnGap: 21,
     rowGap: 14,
   },
   categoryBtn: {
-    width: 127,
+    width: 126,
     backgroundColor: '#f7f2fa',
     borderRadius: 12,
-    height: 77,
+    height: 76.5,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
+    gap: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
@@ -150,18 +152,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#c2ebbc',
   },
   categoryIcon: {
-    width: 36,
-    height: 36,
+    // marginTop: 5,
+    width: 48,
+    height: 48,
   },
   dotsText: {
     fontFamily: 'Comfortaa-Bold',
     fontSize: 24,
     color: '#1e1e1e',
     letterSpacing: 4,
+    paddingTop: 19,
   },
   categoryLabel: {
     fontFamily: 'Comfortaa-Light',
-    fontSize: 13,
+    fontSize: 11,
     color: '#1e1e1e',
     textAlign: 'center',
   },
@@ -173,21 +177,28 @@ const styles = StyleSheet.create({
   },
   nextBtn: {
     backgroundColor: '#6f6bc1',
-    borderRadius: 100,
-    height: 50,
+    borderRadius: 8,
+    width: 280,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 8,
+    height: 50,
   },
   nextBtnDisabled: {
     backgroundColor: '#bcbcbc',
   },
   nextBtnText: {
     fontFamily: 'Comfortaa-Bold',
-    fontSize: 16,
-    color: '#fff',
+    fontSize: 14,
+    fontWeight: 600,
+    lineHeight: 150,
+    color: '#1e1e1e',
+    marginLeft: 2,
   },
   nextBtnTextDisabled: {
-    color: '#fff',
+    color: '#79747E',
   },
   pressedButton: {
     backgroundColor: '#6F6BC1',

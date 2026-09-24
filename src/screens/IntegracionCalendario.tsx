@@ -11,7 +11,7 @@ export default function IntegracionCalendario() {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={[styles.header, { paddingTop: insets.top + 20 }]}>
+      <View style={[styles.header, { paddingTop: insets.top + 68 }]}>
         <Text style={styles.headerTitle}>Configuración</Text>
         <Text style={styles.headerSubtitle}>Integración del calendario</Text>
       </View>
@@ -27,8 +27,7 @@ export default function IntegracionCalendario() {
 
       {/* Description */}
       <Text style={styles.description}>
-        Conecta tu calendario para sincronizar eventos y recibir recordatorios automáticos
-        basados en tu agenda.
+        Conecta tu calendario para crear{`\n`}alarmas a partir de tus eventos
       </Text>
 
       {/* Connect button */}
@@ -52,7 +51,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ebeeff',
   },
   header: {
-    paddingHorizontal: 20,
+    paddingLeft: 18,
+    paddingRight: 20,
     alignItems: 'center',
   },
   headerTitle: {
@@ -67,12 +67,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'rgba(20,18,24,0.6)',
     letterSpacing: -0.4,
-    marginTop: 4,
+    marginTop: 8,
     textAlign: 'center',
   },
   iconWrapper: {
     alignItems: 'center',
-    marginTop: 48,
+    marginTop: 68,
   },
   calendarIcon: {
     width: 113,
@@ -83,24 +83,24 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#1e1e1e',
     textAlign: 'center',
-    lineHeight: 24,
+    lineHeight: 20,
     marginHorizontal: 55,
-    marginTop: 32,
+    marginTop: 52,
   },
   buttonWrapper: {
     paddingHorizontal: 47,
-    marginTop: 40,
+    marginTop: 146,
   },
   connectBtn: {
     backgroundColor: '#bcbfff',
-    borderRadius: 100,
+    borderRadius: 8,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
   },
   connectBtnText: {
-    fontFamily: 'Comfortaa-Bold',
-    fontSize: 16,
+    fontFamily: 'Comfortaa-Regular',
+    fontSize: 14,
     color: '#1e1e1e',
   },
   pressedButton: {

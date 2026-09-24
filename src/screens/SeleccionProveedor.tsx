@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList, NavigationProp } from '../navigation/types';
 import TabBar from '../components/TabBar';
+import { useAlarms } from '../state/AlarmContext';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SelecProveedor'>;
 
@@ -18,15 +19,17 @@ export default function SeleccionProveedor({ route }: Props) {
   const navigation = useNavigation<NavigationProp>();
   const insets = useSafeAreaInsets();
   const { selected } = route.params;
+  const { connectCalendar } = useAlarms();
 
   const handleSelect = (id: string) => {
-    navigation.navigate('IntegracionExitosa');
+    connectCalendar();
+    navigation.navigate('Home', { openIntegrationModal: true });
   };
 
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={[styles.header, { paddingTop: insets.top + 20 }]}>
+      <View style={[styles.header, { paddingTop: insets.top + 68 }]}>
         <Text style={styles.headerTitle}>Configuración</Text>
         <Text style={styles.headerSubtitle}>Selecciona tu proveedor</Text>
       </View>
@@ -45,7 +48,15 @@ export default function SeleccionProveedor({ route }: Props) {
               ]}
               onPress={() => handleSelect(provider.id)}
             >
-              <Text style={styles.rowLabel}>{provider.label}</Text>
+              <Text
+                style={[
+                  styles.rowLabel,
+                  provider.id === 'google' && styles.googleLabel,
+                  provider.id === 'microsoft' && styles.microsoftLabel,
+                ]}
+              >
+                {provider.label}
+              </Text>
             </Pressable>
           ))}
         </View>
@@ -82,7 +93,7 @@ const styles = StyleSheet.create({
   },
   listWrapper: {
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: 68,
     paddingHorizontal: 20,
   },
   card: {
@@ -97,8 +108,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   row: {
-    paddingHorizontal: 16,
-    paddingVertical: 18,
+    paddingHorizontal: 42,
+    height: 49,
+    justifyContent: 'center',
     backgroundColor: '#f7f2fa',
   },
   rowSelected: {
@@ -116,5 +128,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#1d1b20',
     letterSpacing: 0.1,
+  },
+  googleLabel: {
+    paddingTop: 2,
+  },
+  microsoftLabel: {
+    paddingTop: 3,
   },
 });

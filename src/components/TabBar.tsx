@@ -63,7 +63,7 @@ export default function TabBar({ activeTab = 'home' }: TabBarProps) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 26,
     left: 0,
     right: 0,
     backgroundColor: 'rgba(255,255,255,0.85)',
@@ -80,12 +80,14 @@ const styles = StyleSheet.create({
   },
   tabRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     height: 44,
+    paddingLeft: 14,
+    paddingRight: 13
   },
   tab: {
-    paddingHorizontal: 26,
+    width: 48,
     paddingTop: 12,
     paddingBottom: 8,
     alignItems: 'center',
