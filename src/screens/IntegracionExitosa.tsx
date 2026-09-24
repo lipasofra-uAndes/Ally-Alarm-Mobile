@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'Comfortaa-Bold',
-    fontSize: 20,
+    fontSize: 23.6,
     color: '#1e1e1e',
     textAlign: 'center',
     letterSpacing: -0.3,

@@ -1,17 +1,16 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, useWindowDimensions } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NavigationProp } from '../navigation/types';
 
 export default function InicioScreen() {
   const navigation = useNavigation<NavigationProp>();
-  const { width, height } = useWindowDimensions();
 
   return (
     <View style={styles.container}>
       {/* Background landscape image */}
       <Image
         source={require('../../assets/images/background-mountain.png')}
-        style={[styles.background, { width, height }]}
+        style={styles.background}
         resizeMode="cover"
       />
 
@@ -71,14 +70,19 @@ const styles = StyleSheet.create({
   },
   background: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    top: -26,
+    left: -133,
+    width: 665,
+    height: 927,
+    aspectRatio: 33 / 46,
+    backgroundColor: '#d3d3d3',
   },
   content: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 110,
+    paddingTop: 133,
     paddingBottom: 82,
+    transform: [{ translateY: -24 }],
   },
   logo: {
     width: 335,
@@ -89,13 +93,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Comfortaa-Light',
     fontSize: 24,
     color: '#fff',
-    marginTop: 20,
+    marginTop:20,
   },
   providersRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 44,
-    marginTop: 18,
+    marginTop: 24,
+    height: 55,
+    transform: [{ translateY: -6 }],
   },
   googleIcon: {
     width: 37,
@@ -116,6 +122,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: 213,
     marginTop: 'auto',
+    transform: [{ translateY: 24 }],
   },
   termsUnderline: {
     textDecorationLine: 'underline',

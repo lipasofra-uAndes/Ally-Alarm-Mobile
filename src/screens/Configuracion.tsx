@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Pressable, View, Text, StyleSheet } from 'react-native';
-import { Switch } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NavigationProp } from '../navigation/types';
@@ -33,10 +32,18 @@ export default function Configuracion() {
         {/* Sugerencias inteligentes */}
         <View style={styles.row}>
           <Text style={styles.rowLabel}>Sugerencias inteligentes</Text>
-            <Switch
-              value={sugerencias}
-              onValueChange={setSugerencias}
-          />
+          <Pressable
+            onPress={() => setSugerencias((value) => !value)}
+            style={[styles.switchTrack, sugerencias && styles.switchTrackActive]}
+            accessibilityRole="switch"
+            accessibilityState={{ checked: sugerencias }}
+          >
+            <View style={[styles.switchThumb, sugerencias && styles.switchThumbActive]}>
+              <View style={styles.switchInnerCircle}>
+                <View style={[styles.switchInnerDot, sugerencias && styles.switchInnerDotActive]} />
+              </View>
+            </View>
+          </Pressable>
         </View>
 
         <View style={styles.divider} />
@@ -96,6 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingRight: 9,
     paddingHorizontal: 16,
     paddingTop: 16,
     paddingBottom: 14
@@ -112,6 +120,59 @@ const styles = StyleSheet.create({
   },
   pressedRow: {
     backgroundColor: '#6F6BC1',
+  },
+  switchTrack: {
+    width: 39,
+    height: 24,
+    padding: 2,
+    borderRadius: 75,
+    backgroundColor: '#E7E0EC',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  switchTrackActive: {
+    backgroundColor: '#6750A4',
+    justifyContent: 'flex-end',
+  },
+  switchThumb: {
+    width: 20,
+    height: 20,
+    borderRadius: 75,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.15,
+    shadowRadius: 2,
+    elevation: 3,
+    overflow: 'hidden',
+  },
+  switchThumbActive: {
+    width: 20,
+    height: 20,
+    transform: [{ translateX: 0 }],
+  },
+  switchInnerCircle: {
+    width: 16,
+    height: 0,
+    borderRadius: 18,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  switchInnerDot: {
+    width: 4,
+    height: 4,
+    borderRadius: 17.25,
+    backgroundColor: '#FFFFFF',
+    opacity: 0,
+  },
+  switchInnerDotActive: {
+    backgroundColor: '#6750A4',
+    opacity: 1,
   },
   divider: {
     height: 1,

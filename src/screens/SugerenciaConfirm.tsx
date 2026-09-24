@@ -22,12 +22,14 @@ export default function SugerenciaConfirm() {
   return (
     <Pressable style={styles.backdrop} onPress={() => navigation.goBack()}>
       <Pressable style={styles.card} onPress={() => {}}>
-        <Image
-          source={require('../../assets/images/icon-sparkles.png')}
-          style={styles.sparklesIcon}
-          resizeMode="contain"
-        />
-        <Text style={styles.title}>Sugerencia inteligente</Text>
+        <View style={styles.heading}>
+          <Image
+            source={require('../../assets/images/icon-sparkles.png')}
+            style={styles.sparklesIcon}
+            resizeMode="contain"
+          />
+          <Text style={styles.title}>Sugerencia inteligente</Text>
+        </View>
         <Text style={styles.question}>
           ¿Estás seguro que quieres crear la alarma recomendada?
         </Text>
@@ -63,10 +65,11 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: '#f7f2fa',
-    borderRadius: 16,
-    width: 300,
-    paddingVertical: 32,
-    paddingHorizontal: 24,
+    borderRadius: 8,
+    width: 298,
+    height: 237,
+    paddingTop: 14,
+    paddingHorizontal: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
@@ -74,41 +77,48 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 8,
   },
+  heading: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 38,
+    marginBottom: 27,
+  },
   sparklesIcon: {
-    width: 40,
-    height: 40,
-    marginBottom: 12,
+    width: 20,
+    height: 20,
+    marginRight: 8,
   },
   title: {
     fontFamily: 'Comfortaa-Bold',
-    fontSize: 18,
-    color: '#1e1e1e',
-    textAlign: 'center',
-    marginBottom: 12,
-  },
-  question: {
-    fontFamily: 'Comfortaa-Regular',
     fontSize: 14,
     color: '#1e1e1e',
     textAlign: 'center',
-    marginBottom: 8,
+    marginBottom: 0,
+  },
+  question: {
+    fontFamily: 'Comfortaa-Regular',
+    fontSize: 13,
+    color: '#1e1e1e',
+    textAlign: 'center',
+    marginBottom: 15,
   },
   detail: {
     fontFamily: 'Comfortaa-Light',
-    fontSize: 12,
+    fontSize: 13,
     color: 'rgba(20,18,24,0.6)',
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: 27,
   },
   buttonsRow: {
     flexDirection: 'row',
-    gap: 12,
+    gap: 10,
     width: '100%',
   },
   noBtn: {
     flex: 1,
-    height: 40,
-    borderRadius: 100,
+    height: 35,
+    borderRadius: 8,
     borderWidth: 1,
     borderColor: '#bcbfff',
     backgroundColor: '#fff',
@@ -122,8 +132,8 @@ const styles = StyleSheet.create({
   },
   yesBtn: {
     flex: 1,
-    height: 40,
-    borderRadius: 100,
+    height: 35,
+    borderRadius: 8,
     backgroundColor: '#bcbfff',
     alignItems: 'center',
     justifyContent: 'center',
