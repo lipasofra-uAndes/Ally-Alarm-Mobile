@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, Image, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, Pressable, StyleSheet, useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NavigationProp } from '../navigation/types';
@@ -25,7 +25,14 @@ const categories: Category[] = [
 export default function CrearAlarmaCategoria() {
   const navigation = useNavigation<NavigationProp>();
   const insets = useSafeAreaInsets();
+  const { width: screenWidth } = useWindowDimensions();
   const [selected, setSelected] = useState<string | null>(null);
+  const gridGap = 16;
+  const gridPadding = 24;
+  const categoryWidth = Math.max(
+    126,
+    Math.min(180, (screenWidth - gridPadding * 2 - gridGap) / 2),
+  );
 
   const handleSelect = (id: string) => {
     setSelected(id);
@@ -52,12 +59,13 @@ export default function CrearAlarmaCategoria() {
       </View>
 
       {/* Category grid */}
-      <View style={styles.grid}>
+      <View style={[styles.grid, { paddingHorizontal: gridPadding, columnGap: gridGap }]}>
         {categories.map((cat) => (
           <Pressable
             key={cat.id}
             style={[
               styles.categoryBtn,
+              { width: categoryWidth },
               selected === cat.id && { backgroundColor: cat.selectedColor },
             ]}
             onPress={() => handleSelect(cat.id)}
@@ -128,14 +136,11 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingLeft: 52,
-    paddingHorizontal: 50,
     marginTop: 58,
-    columnGap: 21,
     rowGap: 14,
+    justifyContent: 'center',
   },
   categoryBtn: {
-    width: 126,
     backgroundColor: '#f7f2fa',
     borderRadius: 12,
     height: 76.5,
@@ -193,9 +198,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Comfortaa-Bold',
     fontSize: 14,
     fontWeight: 600,
-    lineHeight: 150,
+    lineHeight: 18,
     color: '#1e1e1e',
     marginLeft: 2,
+    includeFontPadding: false,
   },
   nextBtnTextDisabled: {
     color: '#79747E',

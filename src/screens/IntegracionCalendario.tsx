@@ -31,7 +31,12 @@ export default function IntegracionCalendario() {
       </Text>
 
       {/* Connect button */}
-      <View style={styles.buttonWrapper}>
+      <View
+        style={[
+          styles.buttonWrapper,
+          { bottom: 44 + insets.bottom + 20 },
+        ]}
+      >
         <Pressable
           style={({ pressed }) => [styles.connectBtn, pressed && styles.pressedButton]}
           onPress={() => navigation.navigate('SelecProveedor', { selected: null })}
@@ -84,12 +89,17 @@ const styles = StyleSheet.create({
     color: '#1e1e1e',
     textAlign: 'center',
     lineHeight: 20,
-    marginHorizontal: 55,
+    alignSelf: 'center',
+    width: '90%',
     marginTop: 52,
   },
   buttonWrapper: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
     paddingHorizontal: 47,
-    marginTop: 146,
+    zIndex: 1,
+    elevation: 1,
   },
   connectBtn: {
     backgroundColor: '#bcbfff',

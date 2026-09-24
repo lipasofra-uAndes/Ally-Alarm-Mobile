@@ -1,5 +1,4 @@
-import { SvgUri } from 'react-native-svg';
-import { Asset } from 'expo-asset';
+import { Image } from 'react-native';
 
 type FigmaIconProps = {
   source: number;
@@ -9,7 +8,11 @@ type FigmaIconProps = {
 };
 
 export default function FigmaIcon({ source, width, height, opacity = 1 }: FigmaIconProps) {
-  const asset = Asset.fromModule(source);
-
-  return <SvgUri uri={asset.uri} width={width} height={height} opacity={opacity} />;
+  return (
+    <Image
+      source={source}
+      style={{ width, height, opacity }}
+      resizeMode="contain"
+    />
+  );
 }

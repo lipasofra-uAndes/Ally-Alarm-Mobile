@@ -84,7 +84,11 @@ export default function HomeAlarmas({ route }: Props) {
                 <Text style={styles.alarmTime}>{alarm.time}</Text>
               </View>
               <TouchableOpacity style={styles.alarmMore}>
-                <Text style={styles.alarmMoreDots}>•••</Text>
+                <View style={styles.alarmMoreDots}>
+                  <View style={styles.alarmMoreDot} />
+                  <View style={styles.alarmMoreDot} />
+                  <View style={styles.alarmMoreDot} />
+                </View>
               </TouchableOpacity>
             </View>
           ))}
@@ -93,7 +97,11 @@ export default function HomeAlarmas({ route }: Props) {
 
       {/* FAB */}
       <Pressable
-        style={({ pressed }) => [styles.fab, pressed && styles.fabPressed]}
+        style={({ pressed }) => [
+          styles.fab,
+          { bottom: 44 + insets.bottom + 20 },
+          pressed && styles.fabPressed,
+        ]}
         onPress={() => navigation.navigate('CrearCategoria')}
       >
         {({ pressed }) => (pressed ? (
@@ -225,20 +233,23 @@ const styles = StyleSheet.create({
   alarmInfo: {
     flex: 1,
     alignItems: 'center',
-    marginBottom: -6,
   },
   alarmName: {
     fontFamily: 'Comfortaa-Regular',
     fontSize: 13,
+    lineHeight: 16,
+    includeFontPadding: false,
     color: '#000',
     letterSpacing: 0.5,
   },
   alarmTime: {
     fontFamily: 'Comfortaa-Regular',
     fontSize: 13,
+    lineHeight: 16,
+    includeFontPadding: false,
     color: '#000',
     letterSpacing: 0.5,
-    marginTop: 8,
+    marginTop: 5,
   },
   alarmMore: {
     marginRight: 14,
@@ -246,18 +257,21 @@ const styles = StyleSheet.create({
     height: 22,
     alignItems: 'center',
     justifyContent: 'center',
-    transform: [{ rotate: '90deg' }],
   },
   alarmMoreDots: {
-    fontSize: 14,
-    color: '#000',
-    letterSpacing: 0,
-    paddingRight: 11,
-    paddingBottom: 15,
+    width: 6,
+    height: 18,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  alarmMoreDot: {
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: '#000',
   },
   fab: {
     position: 'absolute',
-    bottom: 91,
     left: 10,
     width: 92,
     height: 92,

@@ -135,7 +135,7 @@ export default function CrearAlarmaForm() {
         </View>
 
         {/* Sound dropdown */}
-        <View style={styles.sectionRow}>
+        <View style={[styles.sectionRow, soundOpen && styles.soundSectionRow]}>
           <Text style={styles.label}>Sonidos</Text>
           <View style={styles.soundFieldWrapper}>
             <Pressable style={styles.dropdown} onPress={() => setSoundOpen((open) => !open)}>
@@ -211,7 +211,12 @@ export default function CrearAlarmaForm() {
       </ScrollView>
 
       {/* Save button */}
-      <View style={styles.saveBarWrapper}>
+      <View
+        style={[
+          styles.saveBarWrapper,
+          soundOpen && styles.saveBarBehindDropdown,
+        ]}
+      >
         <Pressable
           style={({ pressed }) => [
             styles.saveBtn,
@@ -409,6 +414,10 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: 240,
   },
+  soundSectionRow: {
+    zIndex: 2,
+    elevation: 2,
+  },
   dropdown: {
     backgroundColor: '#fff',
     borderRadius: 8.8,
@@ -499,6 +508,12 @@ const styles = StyleSheet.create({
     bottom: 198,
     left: 47,
     right: 47,
+    zIndex: 1,
+    elevation: 1,
+  },
+  saveBarBehindDropdown: {
+    zIndex: -1,
+    elevation: 0,
   },
   saveBtn: {
     backgroundColor: '#6f6bc1',

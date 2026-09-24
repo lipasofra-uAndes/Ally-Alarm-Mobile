@@ -1,96 +1,117 @@
-# Ally Alarm — React Native (Expo)
+# Ally Alarm
 
-Complete React Native / Expo port of the Ally Alarm mobile application.
-All 16 screens from the Figma designs are implemented.
+Aplicación móvil para crear y gestionar alarmas personalizadas según distintas
+categorías: medicamentos, entrenamiento, estudio o trabajo, reuniones, viajes y
+otras actividades.
 
-## Prerequisites
+La aplicación fue construida con **React Native**, **Expo** y **TypeScript**.
+Incluye el flujo de inicio de sesión, creación de alarmas, sugerencias
+inteligentes e integración con calendarios.
 
-- Node.js 20+
-- pnpm, npm, or yarn
-- Expo CLI: `npm install -g expo-cli`
-- iOS: Xcode + Simulator **or** Expo Go app on a physical device
-- Android: Android Studio + emulator **or** Expo Go app on a physical device
+## Descargar la aplicación
 
-## Setup
+![Código QR para descargar Ally Alarm](assets/images/qr-apk.png)
 
-### 1. Install dependencies
+**Enlace de descarga del APK:**
+
+https://expo.dev/accounts/lipasofra/projects/ally-alarm/builds/d045b4ec-851c-4ed7-98fc-e051f05cabed
+
+## Diseño y adaptación
+
+Los diseños originales de Figma fueron creados para una pantalla de **375 × 812
+dp**, tomando como referencia un iPhone y el espacio inferior de la “rayita” de
+navegación de iOS.
+
+Durante la implementación en el dispositivo Android, la barra de navegación del
+sistema ocupa su propio espacio inferior. Por eso la tab bar se ajustó para usar
+el área segura real del dispositivo en lugar de depender del
+espacio fijo reservado por el diseño de iOS. También se adaptaron las posiciones
+del botón flotante y de los botones inferiores para evitar superposiciones en
+distintas alturas de pantalla.
+
+*Se hicieron estos cambios aunque no se solicitaban ya que esto afectaba de manera considerable la navegación y la experiencia de usuario.*
+
+## Ejecutar el proyecto localmente
+
+### Requisitos
+
+- Node.js 20 o superior.
+- npm, pnpm o yarn.
+- Android Studio y un emulador Android, o un dispositivo físico con Expo Go.
+- Para iOS: Xcode y un simulador, o un dispositivo con Expo Go.
+
+### Instalación
+
+Clona el repositorio y entra en la carpeta del proyecto:
+
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd ally-alarm-native
+```
+
+Instala las dependencias:
 
 ```bash
 npm install
-# or
-yarn install
 ```
 
-### 2. Copy and rename assets
+### Iniciar la aplicación
 
-Run the helper script from this directory:
-
-```bash
-bash copy-assets.sh
-```
-
-This copies images from the sibling `code/public/assets/` directory into
-`assets/images/` with human-readable names.
-
-> **SVG icons**: four icons (settings, home, create, FAB) are SVGs in the
-> source project. The script copies them as-is. Either:
-> - Install `react-native-svg` and convert the `<Image>` usages to `<SvgUri>`, or
-> - Convert them to PNG with Inkscape / `svgexport` at 48×48px.
-
-### 3. Add fonts
-
-Download the font files and place them in `assets/fonts/`:
-
-| File | Source |
-|---|---|
-| `Comfortaa-Light.ttf` | Google Fonts — Comfortaa |
-| `Comfortaa-Regular.ttf` | Google Fonts — Comfortaa |
-| `Comfortaa-Medium.ttf` | Google Fonts — Comfortaa |
-| `Comfortaa-SemiBold.ttf` | Google Fonts — Comfortaa |
-| `Comfortaa-Bold.ttf` | Google Fonts — Comfortaa |
-
-Download link: https://fonts.google.com
-
-### 4. Run
+Inicia el servidor de Expo:
 
 ```bash
-# Start Expo dev server
 npm start
+```
 
-# Run on iOS Simulator
+Después puedes abrir la aplicación con una de estas opciones:
+
+```bash
+# Android conectado o emulador abierto
+npm run android
+
+# iOS Simulator, solo en macOS con Xcode
 npm run ios
 
-# Run on Android emulator
-npm run android
+# Navegador web
+npm run web
 ```
 
-## Navigation flow
+También puedes escanear el código QR mostrado por Expo Go desde un dispositivo
+físico conectado a la misma red.
 
+## Estructura principal
+
+```text
+src/
+├── components/     Componentes reutilizables como la tab bar
+├── navigation/     Tipos y configuración de navegación
+├── screens/        Pantallas de la aplicación
+└── state/          Estado global de las alarmas
+assets/
+├── fonts/          Fuentes utilizadas por la interfaz
+└── images/         Imágenes e iconos de la aplicación
 ```
-Inicio (login)
-  └─ Home (tap any login provider)
-       ├─ Suggestion banner → SugerenciaConfirm (modal) → Home
-       ├─ Settings icon → Configuracion
-       │    └─ Integración calendario → IntCalendario
-       │         └─ Conectar → SelecProveedor (select=null)
-       │              └─ Tap provider → SelecProveedor (selected)
-       │                   └─ Tap again → IntegracionExitosa (modal) → Home
-       └─ FAB → CrearCategoria
-            ├─ Entrenamiento → ModalPlantilla (modal) → CrearForm → Home
-            └─ Other category → CrearForm → Home
-```
 
-## Screens
+## Pantallas incluidas
 
-| Screen | File |
-|---|---|
-| Login / Splash | `src/screens/InicioScreen.tsx` |
-| Home — alarm list | `src/screens/HomeAlarmas.tsx` |
-| Create alarm — category | `src/screens/CrearAlarmaCategoria.tsx` |
-| Template modal | `src/screens/ModalPlantilla.tsx` |
-| Create alarm — form | `src/screens/CrearAlarmaForm.tsx` |
-| Settings | `src/screens/Configuracion.tsx` |
-| Calendar integration | `src/screens/IntegracionCalendario.tsx` |
-| Provider selection | `src/screens/SeleccionProveedor.tsx` |
-| Integration success (modal) | `src/screens/IntegracionExitosa.tsx` |
-| Smart suggestion confirm (modal) | `src/screens/SugerenciaConfirm.tsx` |
+| Pantalla | Archivo |
+| --- | --- |
+| Inicio / login | `src/screens/InicioScreen.tsx` |
+| Mis alarmas | `src/screens/HomeAlarmas.tsx` |
+| Categorías de alarma | `src/screens/CrearAlarmaCategoria.tsx` |
+| Plantilla de entrenamiento | `src/screens/ModalPlantilla.tsx` |
+| Formulario de alarma | `src/screens/CrearAlarmaForm.tsx` |
+| Configuración | `src/screens/Configuracion.tsx` |
+| Integración de calendario | `src/screens/IntegracionCalendario.tsx` |
+| Selección de proveedor | `src/screens/SeleccionProveedor.tsx` |
+| Integración exitosa | `src/screens/IntegracionExitosa.tsx` |
+| Confirmación de sugerencia | `src/screens/SugerenciaConfirm.tsx` |
+
+## Tecnologías
+
+- React Native 0.86
+- Expo 57
+- TypeScript
+- React Navigation
+- React Native Paper
+- React Native SVG
